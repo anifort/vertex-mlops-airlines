@@ -36,6 +36,8 @@ def test_compile_training_pipeline():
     assert(isinstance(data, dict))
 
 
+
+
 @pytest.mark.inte
 def test_run_training_pipeline():
 
