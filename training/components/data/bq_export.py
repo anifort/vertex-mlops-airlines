@@ -17,7 +17,6 @@ def bq_export_comp(
     from google.cloud import bigquery
     import logging
 
-
     if bq_uri.startswith('bq://'):
         bq_uri = bq_uri[5:]
 

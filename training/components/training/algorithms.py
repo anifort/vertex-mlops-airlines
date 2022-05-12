@@ -116,17 +116,17 @@ def svm_comp(
     
     
     pred = clf.predict(test_df)
-    metrics_class.log_confusion_matrix(["0", "1"], confusion_matrix(test_df_label, pred).tolist())
+    metrics_class.log_confusion_matrix(['Arabica', 'Robusta'], confusion_matrix(test_df_label, pred).tolist())
     
     
     pred_prob = clf.predict_proba(test_df)
-    fpr, tpr, thresholds = roc_curve(y_true=test_df_label, y_score=pred_prob[:,1], pos_label=test_df_label[0])
+    fpr, tpr, thresholds = roc_curve(y_true=test_df_label, y_score=pred_prob[:,1], pos_label='Robusta')
     metrics_class.log_roc_curve(fpr, tpr, thresholds)
     
     with open(report.path, 'w') as f:
         f.write(classification_report(test_df_label,pred))
 
-    metrics_params.log_metric("svm_f1_test_score", (f1_score(test_df_label, pred, pos_label=test_df_label[0])))
+    metrics_params.log_metric("svm_f1_test_score", (f1_score(test_df_label, pred, pos_label='Robusta')))
     metrics_params.log_metric("svm_cross_val_score", (score))
     
     #pathlib.Path(model.path).mkdir(parents=True, exist_ok=True)
@@ -251,18 +251,18 @@ def bt_comp(
     
 
     pred = clf.predict(test_df)
-    metrics_class.log_confusion_matrix(["0", "1"], confusion_matrix(test_df_label, pred).tolist())
+    metrics_class.log_confusion_matrix(['Arabica','Robusta'], confusion_matrix(test_df_label, pred, labels=['Arabica','Robusta']).tolist())
     
     
     pred_prob = clf.predict_proba(test_df)
-    fpr, tpr, thresholds = roc_curve(y_true=test_df_label, y_score=pred_prob[:,1], pos_label=test_df_label[0])
+    fpr, tpr, thresholds = roc_curve(y_true=test_df_label, y_score=pred_prob[:,1], pos_label='Robusta')
     metrics_class.log_roc_curve(fpr, tpr, thresholds)
     
     with open(report.path, 'w') as f:
         f.write(classification_report(test_df_label,pred))
 
 
-    metrics_params.log_metric("bt_f1_test_score", (f1_score(test_df_label, pred, pos_label=test_df_label[0])))
+    metrics_params.log_metric("bt_f1_test_score", (f1_score(test_df_label, pred, pos_label='Robusta')))
     metrics_params.log_metric("bt_cross_val_score", (score))
     
     #pathlib.Path(model.path).mkdir(parents=True, exist_ok=True)

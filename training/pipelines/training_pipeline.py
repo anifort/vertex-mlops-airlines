@@ -15,7 +15,6 @@ from training.components.training.blessed_model import blessed_model_comp
 from google.cloud.aiplatform.pipeline_jobs import PipelineJob
 
 
-
 def compile_pipeline(pipeline_filename, pipeline_name):
 
     @dsl.pipeline(
